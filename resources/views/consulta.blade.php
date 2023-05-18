@@ -63,21 +63,31 @@
 
                                         </thead>
                                         <tbody>
-                                            @foreach($agendamentos as $tableagenda)
-                                                <tr>  
+                                        @foreach ($agendamentos as $tblAgendamentos)
+                                        <tr>
+                                        
+                                            <td scope="col">{{$tblAgendamentos->nome}} </td>
+                                            <td scope="col">{{$tblAgendamentos->telefone}}</td>
+                                            <td scope="col">{{$tblAgendamentos->origem}}</td>
+                                            <td scope="col">{{$tblAgendamentos->data_contato}}</td>
+                                            <td scope="col">{{$tblAgendamentos->observacao}}</td>
+                                            
+                                            <td scope="col">
 
-                                                    <td>{{ $tableagenda->nome }}</td>
-                                                    <td>{{ $tableagenda->telefone }}</td>
-                                                    <td>{{ $tableagenda->origem }}</td>
-                                                    <td>{{ $tableagenda->data_contato }}</td>
-                                                    <td>{{ $tableagenda->observacao }}</td>
-                                                    <td>
-                                                        <button class="btn btn-primary" type="submit" href='/editar'>Editar</button>
-                                                        <button class="btn btn-primary" type="submit" >Excluir</button>
-                                                    </td>
+                                                <form action="{{ route('agendamentos.destroy', $tblAgendamentos->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-primary">Excluir</button>
+                                                </form>
 
-                                                </tr>
-                                            @endforeach
+                                                <form action="{{ route('agendamentos.edit', $tblAgendamentos->id) }}" method="GET">
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-primary">Editar</button>
+                                                </form>
+                                            </td>
+                                        
+                                        </tr>
+                                        @endforeach
                                         </tbody>
                                     </table>
                                 <!-- FIM TABELA -->

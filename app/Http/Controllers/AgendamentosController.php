@@ -28,13 +28,34 @@ class AgendamentosController extends Controller
         $agendamento->observacao = $request->observacao;
         $agendamento->save();
 
-        return redirect()->route('index')
-            ->with('success', 'Agendamento criado com sucesso!');
+        return redirect()->route('index');
     }
 
     
     public function show(){
-        $tableagenda = Agendamentos::all();
-        return view('consulta', ['agendamentos' => $tableagenda]);
+        $tblAgendamentos = Agendamentos::all();
+        return view('consulta', ['agendamentos' => $tblAgendamentos]);
     }
+    
+
+    public function destroy($id)
+    {
+        Agendamentos::find($id)->delete();
+        return redirect('consulta');
+    }
+
+
+    public function edit($id)
+    {
+        $agendamento = Agendamentos::find($id);
+        return view('editar', ['agendamento' => $agendamento]);
+    }
+
+
+    public function update(Request $request)
+    {
+        Agendamentos::findOrFail($request->id)->update($request->all());
+        return redirect('consulta');
+    }
+
 }

@@ -56,36 +56,37 @@
                             <br>
 
                             <!-- FORMULÁRIO -->
-                            <form class="row g-3" method="POST" id="form" action="{{route('agendamentos.store')}}" nome="form">
+                            <form class="row g-3" method="POST" id="form" action="/atualizar/{{ $agendamento->id }}" nome="form">
                                 @csrf
+                                @method('PUT')
                                 <div class="form-row">
                                     <label for="validationCustom01">Nome</label>
-                                    <input type="text" name="nome" class="form-control" id="validationCustom01" placeholder="Nome Completo" required>
+                                    <input type="text" value="{{$agendamento->nome}}" class="form-control" id="Nome" placeholder="Nome Completo" required>
                                     <br>
                                                         
                                     <label for="validationCustom02">Telefone:</label>
-                                    <input type="tel" name="telefone" class="form-control" id="validationCustom02" placeholder="(xx) xxxxx-xxxx"  required>
+                                    <input type="tel" value="{{$agendamento->telefone}}" class="form-control" id="Telefone" placeholder="(xx) xxxxx-xxxx"  required>
                                     <br>
 
                                     <label for="inputState" class="form-label">Origem</label>
-                                    <select class="form-select" name="origem" id="inlineFormCustomSelect" required>
-                                        <option selected value="Celular">Celular</option>
-                                        <option value="Telefone Fixo">Telefone Fixo</option>
-                                        <option value="Redes Sociais">Redes Sociais</option>
+                                    <select class="form-select" id="Origem" required>
+                                        <option selected {{ $agendamento->origem === 'Celular' ? "selected" : ''}} >Celular</option>
+                                        <option {{ $agendamento->origem === 'Telefone Fixo' ? "selected" : ''}} >Telefone Fixo</option>
+                                        <option {{ $agendamento->origem === 'Redes Sociais' ? "selected" : ''}} >Redes Sociais</option>
                                     </select>     
                                     <br>
 
                                     <label for="validationCustom03">Data do Contato</label>
-                                    <input type="date" name="contato" class="form-control" id="validationCustom03" placeholder="dd/mm/aaaa" required>
+                                    <input type="date" value="{{$agendamento->data_contato}}" class="form-control" id="DataContato" placeholder="dd/mm/aaaa" required>
                                     <br>
                                                         
                                     <div class="form-group">
                                         <label for="exampleFormControlTextarea1">Observação</label>
-                                        <textarea class="form-control" name="observacao" name="txtObservacao" id="txtObservacao" placeholder="Digite uma observação" rows="3" required></textarea>
+                                        <textarea class="form-control" value="{{$agendamento->observacao}}" id="observacao" placeholder="Digite uma observação" rows="3" required></textarea>
                                     </div>
                                     <br>
 
-                                    <button class="btn btn-primary" type="submit" href='/consulta'>Editar</button>
+                                    <button class="btn btn-primary" type="submit" >Editar</button>
                                 </div>
                                 <!-- FIM FORMULÁRIO -->
                             </form>

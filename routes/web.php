@@ -22,6 +22,8 @@ Route::get('/', function () {
 
 Route::get('/consulta', [AgendamentosController::class, 'show'])->name('agendamentos.show');
 
-Route::get('/editar', function () {
-    return view('editar');
-})->name('editar');
+Route::delete('/excluir/{id}', [AgendamentosController::class, 'destroy'])->name('agendamentos.destroy');
+
+Route::get('/editar{id}', [AgendamentosController::class, 'edit'])->name('agendamentos.edit');
+
+Route::put('/atualizar/{id}', [AgendamentosController::class, 'update'])->name('agendamentos.update');
